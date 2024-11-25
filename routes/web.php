@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('movies.search');
 });
 
-Route::get('/movies/search', [MovieController::class, 'search'])->name('movies.search');
-Route::get('/movies/{id}', [MovieController::class, 'details'])->name('movies.details');
-Route::get('/movies/trending', [MovieController::class, 'trending'])->name('movies.trending');
+Route::name('movies.')->group(function () {
+    Route::get('/search', [MovieController::class, 'search'])->name('movie-search');
+    Route::get('/details/{id}', [MovieController::class, 'details'])->name('movie-details');
+    Route::get('/trending', [MovieController::class, 'trending'])->name('trending-movies');
+});
 
